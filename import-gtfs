@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+mysql  -u $1 -p"$2" < create.sql
+
+current_path=$(pwd)
+
+feed_files=('agency' 'routes' 'shapes' 'calendar_dates' 'trips' 'stops' 'stop_times' 'transfers')
+
+for i in "${feed_files[@]}"
+do
+    :
+    echo $i
+    cat load-data-infile.sql | sed "s|{folder}|$current_path|g" | sed "s|{table}|$i|g" | mysql
+    echo
+done
