@@ -1,4 +1,4 @@
-# openov-gtfs-mysql
+# ovapi-gtfs-mysql
 
 Scriptje om “effe snel” wat testjes uit te voeren met de GTFS-data van gtfs.openov.nl.
 

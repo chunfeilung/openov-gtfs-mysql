@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-mysql  -u $1 -p"$2" < create.sql
+rm -rf gtfs-openov-nl.zip
+
+wget http://gtfs.openov.nl/gtfs/gtfs-openov-nl.zip
+
+mkdir gtfs
+tar zxf gtfs-openov-nl.zip --directory gtfs
+
+mysql  -u $1 -p"$2" < create-tables.sql
 
 current_path=$(pwd)
 
