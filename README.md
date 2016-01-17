@@ -7,7 +7,7 @@ Scriptje om “effe snel” wat testjes uit te voeren met de GTFS-data van gtfs.
 Clone deze repository:
 
 ```bash
-git clone https://github.com/overstapp/ovapi-gtfs-mysql
+git clone https://github.com/overstapp/openov-gtfs-mysql
 ```
 
 Zorg ervoor dat je een MySQL-server hebt draaien.
