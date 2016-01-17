@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS agency (
 
 
 CREATE TABLE IF NOT EXISTS routes (
-    route_id                MEDIUMINT       NOT NULL,
+    route_id                INT UNSIGNED    NOT NULL,
     agency_id               VARCHAR(20)     NOT NULL,
     route_short_name        VARCHAR(50)     NOT NULL,
     route_long_name         VARCHAR(255)    NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS routes (
 
 
 CREATE TABLE IF NOT EXISTS shapes (
-    shape_id                MEDIUMINT       NOT NULL,
+    shape_id                INT UNSIGNED    NOT NULL,
     shape_pt_sequence       SMALLINT        NOT NULL,
     shape_pt_lat            VARCHAR(20)     NOT NULL,
     shape_pt_lon            VARCHAR(20)     NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS shapes (
 
 
 CREATE TABLE IF NOT EXISTS calendar_dates (
-    service_id              MEDIUMINT       NOT NULL,
+    service_id              INT UNSIGNED    NOT NULL,
     date                    VARCHAR(8),
     exception_type          TINYINT,
 
@@ -54,9 +54,9 @@ CREATE TABLE IF NOT EXISTS calendar_dates (
 
 
 CREATE TABLE IF NOT EXISTS trips (
-    route_id                MEDIUMINT       NOT NULL,
-    service_id              MEDIUMINT       NOT NULL,
-    trip_id                 MEDIUMINT       NOT NULL,
+    route_id                INT UNSIGNED    NOT NULL,
+    service_id              INT UNSIGNED    NOT NULL,
+    trip_id                 INT UNSIGNED    NOT NULL,
     realtime_trip_id        VARCHAR(30),
     trip_headsign           VARCHAR(40),
     trip_short_name         VARCHAR(60),
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS stops (
 
 
 CREATE TABLE IF NOT EXISTS stop_times (
-    trip_id                 MEDIUMINT       NOT NULL,
+    trip_id                 INT UNSIGNED    NOT NULL,
     stop_sequence           SMALLINT        NOT NULL,
     stop_id                 VARCHAR(20),
     stop_headsign           VARCHAR(80),
@@ -108,10 +108,10 @@ CREATE TABLE IF NOT EXISTS stop_times (
 CREATE TABLE IF NOT EXISTS transfers (
     from_stop_id            VARCHAR(20)     NOT NULL,
     to_stop_id              VARCHAR(20)     NOT NULL,
-    from_route_id           MEDIUMINT,
-    to_route_id             MEDIUMINT,
-    from_trip_id            MEDIUMINT,
-    to_trip_id              MEDIUMINT,
+    from_route_id           INT UNSIGNED,
+    to_route_id             INT UNSIGNED,
+    from_trip_id            INT UNSIGNED,
+    to_trip_id              INT UNSIGNED,
     transfer_type           TINYINT         NOT NULL,
     min_transfer_time       SMALLINT,
 
