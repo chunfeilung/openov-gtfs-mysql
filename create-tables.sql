@@ -33,6 +33,15 @@ CREATE TABLE IF NOT EXISTS routes (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 
+CREATE INDEX route__route_id
+    ON routes(route_id)
+    USING HASH;
+
+CREATE INDEX route__agency_id
+    ON routes(agency_id)
+    USING HASH;
+
+
 CREATE TABLE IF NOT EXISTS shapes (
     shape_id                INT UNSIGNED    NOT NULL,
     shape_pt_sequence       SMALLINT        NOT NULL,
@@ -72,6 +81,19 @@ CREATE TABLE IF NOT EXISTS trips (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 
+CREATE INDEX trips__route_id
+    ON trips(route_id)
+    USING HASH;
+
+CREATE INDEX trips__service_id
+    ON trips(service_id)
+    USING HASH;
+
+CREATE INDEX trips__trip_id
+    ON trips(trip_id)
+    USING HASH;
+
+
 CREATE TABLE IF NOT EXISTS stops (
     stop_id                 VARCHAR(20)     NOT NULL,
     stop_code               VARCHAR(20),
@@ -105,6 +127,11 @@ CREATE TABLE IF NOT EXISTS stop_times (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 
+CREATE INDEX stop_times__stop_id
+    ON stop_times(stop_id)
+    USING HASH;
+
+
 CREATE TABLE IF NOT EXISTS transfers (
     from_stop_id            VARCHAR(20)     NOT NULL,
     to_stop_id              VARCHAR(20)     NOT NULL,
@@ -117,3 +144,28 @@ CREATE TABLE IF NOT EXISTS transfers (
 
     PRIMARY KEY (from_stop_id, to_stop_id, from_route_id, to_route_id, from_trip_id, to_trip_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+
+CREATE INDEX transfers__stop_ids
+    ON transfers(from_stop_id, to_stop_id)
+    USING HASH;
+
+CREATE INDEX transfers__stop_ids_reversed
+    ON transfers(to_stop_id, from_stop_id)
+    USING HASH;
+
+CREATE INDEX transfers__route_ids
+    ON transfers(from_route_id, to_route_id)
+    USING HASH;
+
+CREATE INDEX transfers__route_ids_reversed
+    ON transfers(to_route_id, from_route_id)
+    USING HASH;
+
+CREATE INDEX transfers__trip_ids
+    ON transfers(from_route_id, to_route_id)
+    USING HASH;
+
+CREATE INDEX transfers__trip_ids_reversed
+    ON transfers(to_trip_id, from_trip_id)
+    USING HASH;
