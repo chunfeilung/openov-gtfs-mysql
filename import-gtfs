@@ -1,22 +1,38 @@
 #!/usr/bin/env bash
 
+# Verwijder eventuele oude versie van gtfs-openov-nl.zip indien die er is
 rm -rf gtfs-openov-nl.zip
 
+# Download de meest recente versie van de dienstregelingen van OpenOV.nl
 wget http://gtfs.openov.nl/gtfs/gtfs-openov-nl.zip
 
-mkdir gtfs
-tar zxf gtfs-openov-nl.zip --directory gtfs
+# Deze map bestaat als het goed is al, maar voor de zekerheid maken we hem toch
+# nog een keer aan.
+mkdir -p gtfs
 
-mysql -u $1 -p"$2" < create-tables.sql
+# Pak het bestand gtfs-openov-nl.zip uit naar de map gtfs
+unzip gtfs-openov-nl.zip -d gtfs
 
+# Maak de tabellen aan waarin de data terecht moeten komen
+mysql < create-tables.sql
+
+# Deze hebben we straks nodig voor de query-template
 current_path=$(pwd)
 
+# Deze lijst legt zowel de benodigde bestanden als de aangeraden inlaadvolgorde
+# vast. Momenteel wordt MyISAM gebruikt en worden de GTFS-data inhoudelijk niet
+# gecontroleerd, en maakt dit dus niet zoveel uit. Mocht in de toekomst (weer)
+# InnoDB gebruikt worden, dan is het wel handig om een vaste volgorde aan te
+# houden
 feed_files=('agency' 'routes' 'shapes' 'calendar_dates' 'trips' 'stops' 'stop_times' 'transfers')
 
+# Verwerk elk van de feedbestanden
 for i in "${feed_files[@]}"
 do
     :
+    # Laat zien welk bestand wordt ingeladen
     echo $i
+    # load-data-infile.sql bevat de query-template voor het inlezen vanuit een
+    # CSV-bestand
     cat load-data-infile.sql | sed "s|{folder}|$current_path|g" | sed "s|{table}|$i|g" | mysql
-    echo
 done

@@ -12,8 +12,8 @@ git clone https://github.com/overstapp/openov-gtfs-mysql
 
 Zorg ervoor dat je een MySQL-server hebt draaien.
 
-Voer vervolgens vanuit de hoofdmap het volgende uit, met `username` en `password` vervangen door je MySQL-gebruikersnaam en -wachtwoord:
+Voer vervolgens vanuit de hoofdmap het volgende uit:
 
 ```bash
-./import-gtfs username password
+sudo ./import-gtfs
 ```
