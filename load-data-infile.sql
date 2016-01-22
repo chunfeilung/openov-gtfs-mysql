@@ -1,6 +1,6 @@
 USE gtfs;
 
-LOAD DATA INFILE '{folder}/gtfs/{table}.txt'
+LOAD DATA LOCAL INFILE '{folder}/gtfs/{table}.txt'
     REPLACE INTO TABLE {table}
     FIELDS TERMINATED BY ','
     OPTIONALLY ENCLOSED BY '"'
