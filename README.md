@@ -24,3 +24,6 @@ Voer vervolgens vanuit de hoofdmap het volgende uit:
 ```bash
 sudo ./import-gtfs
 ```
+
+## En verder...
+Deze tool is bedoeld voor testdoeleinden, en wordt in principe dus niet onderhouden. :-)
